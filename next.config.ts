@@ -23,7 +23,12 @@ const nextConfig: NextConfig = {
     const rules: { source: string; destination: string }[] = [];
 
     // IMPORTANTE: cada app filho deve ter basePath próprio
-    if (EMPRESA) rules.push({ source: "/empresa/:path*", destination: `${EMPRESA}/empresa/:path*` });
+    if (EMPRESA) {
+      // exato /empresa  →  /empresa no filho
+      rules.push({ source: "/empresa", destination: `${EMPRESA}/empresa` });
+      // qualquer coisa depois (/empresa/..., /empresa/cadastro, etc.)
+      rules.push({ source: "/empresa/:path*", destination: `${EMPRESA}/empresa/:path*` });
+    }
     if (AFILIADO)        rules.push({ source: "/afiliado/:path*",        destination: `${AFILIADO}/:path*` });
     if (ADMINEMPRESA)    rules.push({ source: "/adminempresa/:path*",    destination: `${ADMINEMPRESA}/:path*` });
     if (MINHA_CONTA)     rules.push({ source: "/minha-conta/:path*",     destination: `${MINHA_CONTA}/:path*` });
