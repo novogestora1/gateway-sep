@@ -29,7 +29,12 @@ const nextConfig: NextConfig = {
       // qualquer coisa depois (/empresa/..., /empresa/cadastro, etc.)
       rules.push({ source: "/empresa/:path*", destination: `${EMPRESA}/empresa/:path*` });
     }
-    if (AFILIADO)        rules.push({ source: "/afiliado/:path*",        destination: `${AFILIADO}/:path*` });
+    if (AFILIADO) {
+      // /afiliado exato
+      rules.push({ source: "/afiliado", destination: `${AFILIADO}/afiliado` });
+      // /afiliado/...
+      rules.push({ source: "/afiliado/:path*", destination: `${AFILIADO}/afiliado/:path*` });
+    }
     if (ADMINEMPRESA)    rules.push({ source: "/adminempresa/:path*",    destination: `${ADMINEMPRESA}/:path*` });
     if (MINHA_CONTA)     rules.push({ source: "/minha-conta/:path*",     destination: `${MINHA_CONTA}/:path*` });
     if (SORTEIOS)        rules.push({ source: "/sorteios/:path*",        destination: `${SORTEIOS}/:path*` });
